@@ -42,8 +42,8 @@ textarea {
   border-top: 1px dashed #000000;
 }
 
-.past {
-  background-color: #d3d3d3;
+.not {
+  background-color: #aaa4a4;
   color: white;
 }
 
