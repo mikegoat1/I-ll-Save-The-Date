@@ -37,6 +37,21 @@ var pm5 = $("#pm5");
 var time5pm = $(pm5).data("time");
 console.log(time5pm);
 
+var saveBtn = document.querySelectorAll(".saveBtn");
+
+
+for(i=0; i < saveBtn.length; i++){
+    saveBtn[i].addEventListener("click", setText)
+}
+
+function setText(){
+    let inputVal = $("textarea").val();
+    let key = this.parentNode.children[1];
+    console.log(key)
+    localStorage.setItem(key, inputVal)
+}
+
+
 
 
 function firstTime() {
@@ -46,7 +61,7 @@ function firstTime() {
 }
 
 console.log(moment().format("h a"));
- 
+
 console.log($(".hour").data("time"));
 console.log($("#9"));
 colorCordinate();
@@ -55,20 +70,25 @@ colorCordinate();
 
 function before(currentHour, time) {
     let currentVal = currentHour.split(" ");
+    currentVal = parseInt(currentVal[0]);
+
     let timeVal = time.split(" ");
-    currentVal[0].parseInt() < timeVal[0].parseInt();
+    timeVal = parseInt(timeVal[0]);
+    return currentVal < timeVal;
+    
 }
 
 function notTimeZ(currentHour, time) {
     let currentVal = currentHour.split(" ");
     let timeVal = time.split(" ");
-    currentVal[1] !== timeVal[1];
+    return currentVal[1] !== timeVal[1];
 }
 
 function timeZ(currentHour, time) {
     let currentVal = currentHour.split(" ");
     let timeVal = time.split(" ");
-    currentVal[1] === timeVal[1];
+    console.log(currentVal[1] === timeVal[1])
+    return currentVal[1] === timeVal[1];
 
 }
 
@@ -76,11 +96,13 @@ function colorCordinate() {
     // if the time(hour) is equal to the current hour then turn red
     let currentHour = moment().format("h a");
     //9am 
+
     if (currentHour === time9am) {
         $("#9").addClass("present");
     } else if ((timeZ(currentHour, time9am)) && (before(currentHour, time9am))) {
         $("#9").addClass("future");
     } else {
+        
         $("#9").addClass("not");
     }
     //10am
