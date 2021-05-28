@@ -46,7 +46,9 @@ for(i=0; i < saveBtn.length; i++){
 
 function setText(){
     let inputVal = $("textarea").val();
-    let key = this.parentNode.children[1];
+    console.log(this.parentNode.children[1].id)
+    let key = this.parentNode.children[1].id
+    // let key = this.parentNode.children[1];
     console.log(key)
     localStorage.setItem(key, inputVal)
 }
