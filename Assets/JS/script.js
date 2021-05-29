@@ -39,23 +39,75 @@ console.log(time5pm);
 
 var saveBtn = document.querySelectorAll(".saveBtn");
 
-
-for(i=0; i < saveBtn.length; i++){
+// looking through the save button for clicks
+for (i = 0; i < saveBtn.length; i++) {
     saveBtn[i].addEventListener("click", setText)
-}
 
-function setText(){
-    let inputVal = $("textarea").val();
-    console.log(this.parentNode.children[1].id)
+}
+// Sets the value when save is pressed
+function setText() {
+    let inputVal = this.parentNode.children[1].value
+    console.log(inputVal)
     let key = this.parentNode.children[1].id
     // let key = this.parentNode.children[1];
     console.log(key)
+    
+
     localStorage.setItem(key, inputVal)
+}
+
+// grabbing stored data and assigning them to the proper place
+function getText() {
+    var stored9am = localStorage.getItem("9");
+    console.log(stored9am);
+    if(stored9am){
+        document.getElementById("9").value = stored9am;
+    }
+    
+    let stored10am = localStorage.getItem("10");
+    if(stored10am){
+        document.getElementById("10").value = stored10am;
+    }
+
+    let stored11am = localStorage.getItem("11");
+    if(stored11am){
+        document.getElementById("11").value = stored11am;
+    }
+
+    let stored12pm = localStorage.getItem("12");
+    if(stored12pm){
+        document.getElementById("12").value = stored12pm;
+    }
+
+    let stored1pm = localStorage.getItem("1");
+    if(stored1pm){
+        document.getElementById("1").value = stored1pm;
+    }
+
+    let stored2pm = localStorage.getItem("2");
+    if(stored2pm){
+        document.getElementById("2").value = stored2pm; 
+    }
+
+    let stored3pm = localStorage.getItem("3"); 
+    if(stored3pm){
+        document.getElementById("3").value = stored3pm;
+    }
+
+    let stored4pm = localStorage.getItem("4"); 
+    if(stored4pm){
+        document.getElementById("4").value = stored4pm;
+    }
+
+    let stored5pm = localStorage.getItem("5");
+    if(stored5pm){
+        document.getElementById("5").value = stored5pm;
+    }
 }
 
 
 
-
+// Date going in header
 function firstTime() {
     let now = moment().format("MMM Do, YYYY [at] hh:mm:ss a");
     $("#currentDay").text(now);
@@ -69,7 +121,7 @@ console.log($("#9"));
 colorCordinate();
 
 
-
+// comparing the time
 function before(currentHour, time) {
     let currentVal = currentHour.split(" ");
     currentVal = parseInt(currentVal[0]);
@@ -77,15 +129,15 @@ function before(currentHour, time) {
     let timeVal = time.split(" ");
     timeVal = parseInt(timeVal[0]);
     return currentVal < timeVal;
-    
-}
 
+}
+// comparing am pm
 function notTimeZ(currentHour, time) {
     let currentVal = currentHour.split(" ");
     let timeVal = time.split(" ");
     return currentVal[1] !== timeVal[1];
 }
-
+// seeing if am pm is not equal 
 function timeZ(currentHour, time) {
     let currentVal = currentHour.split(" ");
     let timeVal = time.split(" ");
@@ -104,7 +156,7 @@ function colorCordinate() {
     } else if ((timeZ(currentHour, time9am)) && (before(currentHour, time9am))) {
         $("#9").addClass("future");
     } else {
-        
+
         $("#9").addClass("not");
     }
     //10am
@@ -184,27 +236,6 @@ function colorCordinate() {
     //is if the time(hour) is before the current hour turn grey
     //else if the time(hour) is after the current hour turn green 
 }
-
-console.log($("#9"));
-
-//querySelectorAll 
-
-//Function that saves and deletes 
-//what ever is in the textarea is added to the local storage if the button is clicked 
-//click event for storage
-//grab val of text area
-
-
-
-
-
-
-
-
-
-
-
-
-
+getText();
 
 setInterval(firstTime, 1000);
